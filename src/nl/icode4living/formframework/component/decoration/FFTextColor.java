@@ -1,7 +1,10 @@
 package nl.icode4living.formframework.component.decoration;
 
+import com.sun.javafx.tk.Toolkit;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontSmoothingType;
 import javafx.scene.text.TextAlignment;
 import nl.icode4living.formframework.component.FFComponent;
 
@@ -13,24 +16,30 @@ import nl.icode4living.formframework.component.FFComponent;
  * @author Marcel
  * @since 01-6-2016.
  */
-public class FFTextColor<T extends FFComponent> extends FFDecoration<T> {
+public class FFTextColor extends FFDecoration {
 
-    Color c;
+    private Color c;
+    private Double s;
 
-    public FFTextColor(T temp, Color c) {
+    public FFTextColor(FFComponent temp, Color c, Double s) {
         super(temp);
         this.c = c;
+        this.s = s;
     }
 
     @Override
     public void draw(GraphicsContext gc2d) {
         super.draw(gc2d);
-        gc2d.setFill(c);
+        System.out.println("textcolor");
+        gc2d.setFill(c != null ? c : Color.BLACK);
+        gc2d.setFont(s != null ? new Font(s) : new Font(16));
+        gc2d.setFontSmoothingType(FontSmoothingType.LCD);
         gc2d.setTextAlign(TextAlignment.CENTER);
         gc2d.fillText(
-                getText(),
-                getX()+(getWidth()/2),
-                getY()+(getHeight()/2)
+                super.getText(),
+                super.getX()+(super.getWidth()/2),
+                super.getY()+(super.getHeight()/2) +
+                        Toolkit.getToolkit().getFontLoader().getFontMetrics(gc2d.getFont()).getLineHeight()/2
         );
     }
 

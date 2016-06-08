@@ -1,5 +1,7 @@
 package nl.icode4living.formframework.component;
 
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 import nl.icode4living.formframework.component.observer.FFOnClickListener;
 
 /**
@@ -17,6 +19,10 @@ public abstract class AbsFFComponent implements FFComponent {
     private String text;
 
     private FFOnClickListener onClickListener;
+
+    @Override
+    public void draw(GraphicsContext gc2d) {
+    }
 
     @Override
     public FFComponent setWidth(int width) {
@@ -81,5 +87,22 @@ public abstract class AbsFFComponent implements FFComponent {
     @Override
     public String getText() {
         return text;
+    }
+
+    @Override
+    public void handle(MouseEvent event) {
+        if (onClickListener != null &&
+                event.getX() > getX() && event.getX() < getX() + getWidth() &&
+                event.getY() > getY() && event.getY() < getY() + getHeight())
+            onClickListener.onClick();
+    }
+
+    public FFComponent getComponent() {
+        return this;
+    }
+
+    @Override
+    public void setComponent(FFComponent component) {
+
     }
 }

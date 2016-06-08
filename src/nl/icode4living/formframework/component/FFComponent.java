@@ -1,6 +1,8 @@
 package nl.icode4living.formframework.component;
 
+import javafx.event.EventHandler;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 import nl.icode4living.formframework.component.observer.FFOnClickListener;
 
 /**
@@ -9,7 +11,7 @@ import nl.icode4living.formframework.component.observer.FFOnClickListener;
  * @author Marcel
  * @since 01-6-2016.
  */
-public interface FFComponent {
+public interface FFComponent extends EventHandler<MouseEvent> {
 
     void draw(GraphicsContext gc2d);
 
@@ -30,4 +32,7 @@ public interface FFComponent {
 
     FFComponent setHeight(int height);
     int getHeight();
+
+    FFComponent getComponent();
+    void setComponent(FFComponent component);
 }
