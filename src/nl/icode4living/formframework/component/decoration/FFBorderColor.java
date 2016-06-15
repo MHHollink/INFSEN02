@@ -1,8 +1,8 @@
 package nl.icode4living.formframework.component.decoration;
 
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import nl.icode4living.formframework.component.FFComponent;
+
+import java.awt.*;
 
 
 /**
@@ -14,30 +14,27 @@ import nl.icode4living.formframework.component.FFComponent;
 public class FFBorderColor extends FFDecoration {
 
     private Color c;
-    private double s;
+    private int s;
 
-    public FFBorderColor(FFComponent temp, Color c, Double s) {
+    public FFBorderColor(FFComponent temp, Color c, Integer s) {
         super(temp);
         this.c = c;
         this.s = s != null ? s : 1;
     }
 
     @Override
-    public void draw(GraphicsContext gc2d) {
+    public void draw(Graphics2D gc2d) {
         super.draw(gc2d);
 
-        double x,y,width,height;
+        gc2d.setColor(c);
 
-        x = getX();
-        y = getY();
-        width = getWidth();
-        height = getHeight();
+        for (int i = 0; i < s; i++)
+            gc2d.drawRect(
+                    getX() + i,
+                    getY() + i,
+                    getWidth() - i * 2,
+                    getHeight() - i * 2
+            );
 
-        gc2d.setStroke(c);
-        gc2d.setLineWidth(s);
-        gc2d.strokeLine(x+(s/2), y+(s/2), x+width-(s/2), y+(s/2));
-        gc2d.strokeLine(x+width-(s/2), y+(s/2), x+width-(s/2), y+height-(s/2));
-        gc2d.strokeLine(x+(s/2), y+height-(s/2), x+width-(s/2), y+height-(s/2));
-        gc2d.strokeLine(x+(s/2), y+height-(s/2), x+(s/2), y+(s/2));
     }
 }

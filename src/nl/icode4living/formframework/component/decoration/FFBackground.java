@@ -1,8 +1,8 @@
 package nl.icode4living.formframework.component.decoration;
 
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import nl.icode4living.formframework.component.FFComponent;
+
+import java.awt.*;
 
 /**
  * TODO: Write class level documentation
@@ -20,7 +20,7 @@ public class FFBackground extends FFDecoration {
     }
 
     @Override
-    public void draw(GraphicsContext g) {
+    public void draw(Graphics2D g) {
         super.draw(g);
 
         int x,y,width,height;
@@ -29,8 +29,10 @@ public class FFBackground extends FFDecoration {
         width = getWidth();
         height = getHeight();
 
-        g.setFill(backgroundColor);
+        g.setColor(backgroundColor);
+
         g.fillRect(x, y, width, height);
 
     }
+
 }

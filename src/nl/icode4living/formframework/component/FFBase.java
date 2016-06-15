@@ -1,5 +1,7 @@
 package nl.icode4living.formframework.component;
 
+import java.awt.*;
+
 /**
  * TODO: Write class level documentation
  *
@@ -18,5 +20,10 @@ public class FFBase extends AbsFFComponent{
         setY(y);
         setHeight(h);
         setWidth(w);
+    }
+
+    @Override
+    public void draw(Graphics2D gc2d) {
+
     }
 }

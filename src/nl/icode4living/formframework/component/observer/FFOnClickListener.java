@@ -1,5 +1,7 @@
 package nl.icode4living.formframework.component.observer;
 
+import java.awt.event.MouseEvent;
+
 /**
  * TODO: Write class level documentation
  *
@@ -8,6 +10,6 @@ package nl.icode4living.formframework.component.observer;
  */
 public interface FFOnClickListener {
 
-    void onClick();
+    void onClick(MouseEvent e);
 
 }

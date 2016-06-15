@@ -1,8 +1,9 @@
 package nl.icode4living.formframework.component;
 
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.MouseEvent;
 import nl.icode4living.formframework.component.observer.FFOnClickListener;
+
+import java.awt.*;
+import java.awt.event.MouseEvent;
 
 /**
  * TODO: Write class level documentation
@@ -19,10 +20,6 @@ public abstract class AbsFFComponent implements FFComponent {
     private String text;
 
     private FFOnClickListener onClickListener;
-
-    @Override
-    public void draw(GraphicsContext gc2d) {
-    }
 
     @Override
     public FFComponent setWidth(int width) {
@@ -44,6 +41,11 @@ public abstract class AbsFFComponent implements FFComponent {
     @Override
     public int getHeight() {
         return height;
+    }
+
+    @Override
+    public void draw(Graphics2D gc2d) {
+
     }
 
     @Override
@@ -89,14 +91,6 @@ public abstract class AbsFFComponent implements FFComponent {
         return text;
     }
 
-    @Override
-    public void handle(MouseEvent event) {
-        if (onClickListener != null &&
-                event.getX() > getX() && event.getX() < getX() + getWidth() &&
-                event.getY() > getY() && event.getY() < getY() + getHeight())
-            onClickListener.onClick();
-    }
-
     public FFComponent getComponent() {
         return this;
     }
@@ -104,5 +98,17 @@ public abstract class AbsFFComponent implements FFComponent {
     @Override
     public void setComponent(FFComponent component) {
 
+    }
+
+    @Override
+    public void onClick(MouseEvent event) {
+        if(
+                (event.getX() >= getX() && event.getX() <= getX()+getWidth()) &&
+                        (event.getY() >= getY() && event.getY() <= getY()+getHeight())
+                ) {
+            if(onClickListener != null) {
+                onClickListener.onClick(event);
+            }
+        }
     }
 }

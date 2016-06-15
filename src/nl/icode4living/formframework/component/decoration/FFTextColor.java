@@ -1,13 +1,8 @@
 package nl.icode4living.formframework.component.decoration;
 
-import com.sun.javafx.tk.Toolkit;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontSmoothingType;
-import javafx.scene.text.TextAlignment;
 import nl.icode4living.formframework.component.FFComponent;
 
+import java.awt.*;
 
 
 /**
@@ -19,28 +14,26 @@ import nl.icode4living.formframework.component.FFComponent;
 public class FFTextColor extends FFDecoration {
 
     private Color c;
-    private Double s;
+    private Integer s;
 
-    public FFTextColor(FFComponent temp, Color c, Double s) {
+    public FFTextColor(FFComponent temp, Color c, Integer s) {
         super(temp);
         this.c = c;
         this.s = s;
     }
 
     @Override
-    public void draw(GraphicsContext gc2d) {
+    public void draw(Graphics2D gc2d) {
         super.draw(gc2d);
-        System.out.println("textcolor");
-        gc2d.setFill(c != null ? c : Color.BLACK);
-        gc2d.setFont(s != null ? new Font(s) : new Font(16));
-        gc2d.setFontSmoothingType(FontSmoothingType.LCD);
-        gc2d.setTextAlign(TextAlignment.CENTER);
-        gc2d.fillText(
-                super.getText(),
-                super.getX()+(super.getWidth()/2),
-                super.getY()+(super.getHeight()/2) +
-                        Toolkit.getToolkit().getFontLoader().getFontMetrics(gc2d.getFont()).getLineHeight()/2
-        );
+        gc2d.setColor(c != null ? c : Color.BLACK);
+        gc2d.setFont(s != null ? new Font("arial", Font.PLAIN, s) : new Font("arial", Font.PLAIN, 16));
+        drawCenteredString(getText(), getWidth(), getHeight(), gc2d);
     }
 
+    public void drawCenteredString(String s, int w, int h, Graphics g) {
+        FontMetrics fm = g.getFontMetrics();
+        int x = (w - fm.stringWidth(s)) / 2 + getX();
+        int y = (fm.getAscent() + (h - (fm.getAscent() + fm.getDescent())) / 2) + getY();
+        g.drawString(s, x, y);
+    }
 }

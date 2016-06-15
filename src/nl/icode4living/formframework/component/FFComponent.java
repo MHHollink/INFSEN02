@@ -1,9 +1,8 @@
 package nl.icode4living.formframework.component;
 
-import javafx.event.EventHandler;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.MouseEvent;
 import nl.icode4living.formframework.component.observer.FFOnClickListener;
+
+import java.awt.*;
 
 /**
  * TODO: Write class level documentation
@@ -11,9 +10,9 @@ import nl.icode4living.formframework.component.observer.FFOnClickListener;
  * @author Marcel
  * @since 01-6-2016.
  */
-public interface FFComponent extends EventHandler<MouseEvent> {
+public interface FFComponent extends FFOnClickListener {
 
-    void draw(GraphicsContext gc2d);
+    void draw(Graphics2D gc2d);
 
     void setOnClickListener(FFOnClickListener listener);
     void removeOnClickListener();

@@ -1,8 +1,9 @@
 package nl.icode4living.formframework.component.decoration;
 
-import javafx.scene.canvas.GraphicsContext;
 import nl.icode4living.formframework.component.AbsFFComponent;
 import nl.icode4living.formframework.component.FFComponent;
+
+import java.awt.*;
 
 /**
  * TODO: Write class level documentation
@@ -18,7 +19,7 @@ public abstract class FFDecoration extends AbsFFComponent {
     }
 
     @Override
-    public void draw(GraphicsContext gc2d) {
+    public void draw(Graphics2D gc2d) {
         temp.draw(gc2d);
     }
 
@@ -73,6 +74,7 @@ public abstract class FFDecoration extends AbsFFComponent {
     }
 
     public void setComponent(FFComponent component) {
-        this.temp = component;
+        component.setComponent(temp);
+        temp = component;
     }
 }
