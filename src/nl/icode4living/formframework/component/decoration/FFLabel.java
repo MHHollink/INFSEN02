@@ -5,29 +5,24 @@ import nl.icode4living.formframework.util.TextUtil;
 
 import java.awt.*;
 
-
 /**
  * TODO: Write class level documentation
  *
  * @author Marcel
- * @since 01-6-2016.
+ * @since 15-6-2016.
  */
-public class FFTextColor extends FFDecoration {
+public class FFLabel extends FFDecoration {
 
-    private Color c;
-    private Integer s;
-
-    public FFTextColor(FFComponent temp, Color c, Integer s) {
+    public FFLabel(FFComponent temp) {
         super(temp);
-        this.c = c;
-        this.s = s;
     }
 
     @Override
     public void draw(Graphics2D gc2d) {
         super.draw(gc2d);
-        gc2d.setColor(c != null ? c : Color.BLACK);
-        gc2d.setFont(s != null ? new Font("arial", Font.PLAIN, s) : new Font("arial", Font.PLAIN, 16));
+        gc2d.setFont(new Font("arial", Font.PLAIN, 16));
         TextUtil.drawCenteredString(getText(), getWidth(), getHeight(), getX(), getY(), gc2d);
     }
+
+
 }

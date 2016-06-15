@@ -10,11 +10,11 @@ import java.awt.*;
  * @author Marcel
  * @since 02-6-2016.
  */
-public class FFBackground extends FFDecoration {
+public class FFBackgroundColored extends FFDecoration {
 
     private Color backgroundColor;
 
-    public FFBackground(FFComponent temp, Color backgroundColor) {
+    public FFBackgroundColored(FFComponent temp, Color backgroundColor) {
         super(temp);
         this.backgroundColor = backgroundColor;
     }
@@ -23,16 +23,8 @@ public class FFBackground extends FFDecoration {
     public void draw(Graphics2D g) {
         super.draw(g);
 
-        int x,y,width,height;
-        x = getX();
-        y = getY();
-        width = getWidth();
-        height = getHeight();
-
         g.setColor(backgroundColor);
-
-        g.fillRect(x, y, width, height);
-
+        g.fillRect(getX(), getY(), getWidth(), getHeight());
     }
 
 }

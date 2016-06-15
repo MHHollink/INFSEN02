@@ -3,7 +3,7 @@ package nl.icode4living.formframework;
 import nl.icode4living.formframework.component.FFBase;
 import nl.icode4living.formframework.component.FFComponent;
 import nl.icode4living.formframework.component.FFScreen;
-import nl.icode4living.formframework.component.decoration.FFBackground;
+import nl.icode4living.formframework.component.decoration.FFBackgroundColored;
 import nl.icode4living.formframework.component.decoration.FFBorderColor;
 import nl.icode4living.formframework.component.decoration.FFTextColor;
 
@@ -29,7 +29,7 @@ public class Application {
         FFScreen screen = new FFScreen(WIDTH, HEIGHT, "Panel");
 
         FFComponent component = new FFTextColor(
-                new FFBackground(
+                new FFBackgroundColored(
                         new FFBase("HelloWorld", 50, 50, 250, 100),
                         Color.CYAN
                 ),
@@ -43,7 +43,7 @@ public class Application {
 
 
 
-                new FFBackground(
+                new FFBackgroundColored(
                         new FFBase("Fucking hell, this is gay!", 400, 200, 200, 200),
                         Color.pink
                 ),
