@@ -1,13 +1,13 @@
 package nl.icode4living.formframework;
 
-import nl.icode4living.formframework.component.FFBase;
 import nl.icode4living.formframework.component.FFComponent;
-import nl.icode4living.formframework.component.FFScreen;
-import nl.icode4living.formframework.component.decoration.FFBackgroundColored;
-import nl.icode4living.formframework.component.decoration.FFBorderColor;
-import nl.icode4living.formframework.component.decoration.FFTextColor;
+import nl.icode4living.formframework.component.FFWindow;
+import nl.icode4living.formframework.component.factory.CustomButtonFactory;
+import nl.icode4living.formframework.component.factory.FlickeringButtonFactory;
 
-import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 /**
  * TODO: Write class level documentation
@@ -25,36 +25,30 @@ public class Application {
     }
 
     public Application() {
+        FFWindow window = new FFWindow(WIDTH, HEIGHT, "Panel");
 
-        FFScreen screen = new FFScreen(WIDTH, HEIGHT, "Panel");
+        Map<String, String> buttonProps = new HashMap<>();
 
-        FFComponent component = new FFTextColor(
-                new FFBackgroundColored(
-                        new FFBase("HelloWorld", 50, 50, 250, 100),
-                        Color.CYAN
-                ),
-                Color.GREEN,
-                24
-        );
-        component.setOnClickListener((e) -> System.out.println("Ello World"));
+        buttonProps.put(CustomButtonFactory.Properties.TEXT_COLOR, "red");
+        buttonProps.put(CustomButtonFactory.Properties.TEXT_SIZE, "29");
+        buttonProps.put(CustomButtonFactory.Properties.BORDER_COLOR, "red");
+        buttonProps.put(CustomButtonFactory.Properties.BORDER_SIZE, "8");
 
-        FFComponent com = new FFTextColor(
-                new FFBorderColor(
+        FFComponent component = new FlickeringButtonFactory()
+                .construct("Click Me!",
+                        200, 50, // X, Y
+                        250, 100,// Width, Height
+                        3, // Flicker speed
+                        (e, s) -> {
+                            System.out.println("clicked!");
+                        },
+                        (e, s) -> {
+                            Random r = new Random();
+                            s.setX(r.nextInt(window.getDrawingPane().getWidth() - s.getWidth()));
+                            s.setY(r.nextInt(window.getDrawingPane().getHeight() - s.getHeight()));
+                        }
+                );
 
-
-
-                new FFBackgroundColored(
-                        new FFBase("Fucking hell, this is gay!", 400, 200, 200, 200),
-                        Color.pink
-                ),
-                Color.RED,
-                5
-                ),
-                Color.YELLOW,
-                24
-        );
-
-
-        screen.getDrawingPane().addComponents(component, com);
+        window.getDrawingPane().addComponents(component);
     }
 }

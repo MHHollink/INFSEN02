@@ -14,7 +14,7 @@ import java.awt.*;
 public abstract class FFDecoration extends AbsFFComponent {
     private FFComponent temp;
 
-    public FFDecoration(FFComponent temp) {
+    protected FFDecoration(FFComponent temp) {
         this.temp = temp;
     }
 

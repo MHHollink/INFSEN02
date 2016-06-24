@@ -1,9 +1,9 @@
 package nl.icode4living.formframework.component;
 
 import nl.icode4living.formframework.component.observer.FFOnClickListener;
+import nl.icode4living.formframework.component.observer.FFOnEnterListener;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
 
 /**
  * TODO: Write class level documentation
@@ -20,6 +20,9 @@ public abstract class AbsFFComponent implements FFComponent {
     private String text;
 
     private FFOnClickListener onClickListener;
+    private FFOnEnterListener onEnterListener;
+
+
 
     @Override
     public FFComponent setWidth(int width) {
@@ -56,6 +59,16 @@ public abstract class AbsFFComponent implements FFComponent {
     @Override
     public void removeOnClickListener() {
         this.onClickListener = null;
+    }
+
+    @Override
+    public void setOnMouseEnterListener(FFOnEnterListener listener) {
+        onEnterListener = listener;
+    }
+
+    @Override
+    public void removeOnMouseEnterListener() {
+        onClickListener = null;
     }
 
     @Override
@@ -101,14 +114,14 @@ public abstract class AbsFFComponent implements FFComponent {
     }
 
     @Override
-    public void onClick(MouseEvent event) {
-        if(
-                (event.getX() >= getX() && event.getX() <= getX()+getWidth()) &&
-                        (event.getY() >= getY() && event.getY() <= getY()+getHeight())
-                ) {
-            if(onClickListener != null) {
-                onClickListener.onClick(event);
-            }
-        }
+    public void onClick(Point event, FFComponent self) {
+        if( event != null && (event.getX() >= getX() && event.getX() <= getX()+getWidth()) && (event.getY() >= getY() && event.getY() <= getY()+getHeight()) && onClickListener != null)
+            onClickListener.onClick(event, self);
+    }
+
+    @Override
+    public void onMouseEnter(Point event, FFComponent self) {
+        if (event != null && (event.getX() >= getX() && event.getX() <= getX() + getWidth()) && (event.getY() >= getY() && event.getY() <= getY() + getHeight()) && onEnterListener != null)
+            onEnterListener.onMouseEnter(event, self);
     }
 }

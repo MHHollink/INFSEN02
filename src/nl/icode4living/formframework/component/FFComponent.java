@@ -1,6 +1,7 @@
 package nl.icode4living.formframework.component;
 
 import nl.icode4living.formframework.component.observer.FFOnClickListener;
+import nl.icode4living.formframework.component.observer.FFOnEnterListener;
 
 import java.awt.*;
 
@@ -10,12 +11,15 @@ import java.awt.*;
  * @author Marcel
  * @since 01-6-2016.
  */
-public interface FFComponent extends FFOnClickListener {
+public interface FFComponent extends FFOnClickListener, FFOnEnterListener {
 
     void draw(Graphics2D gc2d);
 
     void setOnClickListener(FFOnClickListener listener);
     void removeOnClickListener();
+
+    void setOnMouseEnterListener(FFOnEnterListener listener);
+    void removeOnMouseEnterListener();
 
     FFComponent setText(String text);
     String getText();

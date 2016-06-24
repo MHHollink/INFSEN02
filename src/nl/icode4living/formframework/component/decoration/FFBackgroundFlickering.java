@@ -13,25 +13,27 @@ import java.util.Random;
  */
 public class FFBackgroundFlickering extends FFDecoration {
 
-    private Random r;
+    int flickerSpeed;
+    int delta;
+    Color c;
+    Random r;
 
     public FFBackgroundFlickering(FFComponent temp, int flickerSpeed) {
         super(temp);
-
-        r = new Random();
+        this.flickerSpeed = flickerSpeed;
+        this.delta = 0;
+        this.r = new Random();
+        this.c = new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256));
     }
 
     @Override
     public void draw(Graphics2D g) {
         super.draw(g);
-
-        g.setColor(
-                new Color(
-                        r.nextInt(256),
-                        r.nextInt(256),
-                        r.nextInt(256)
-                )
-        );
+        if(delta++ >= flickerSpeed) {
+            delta = 0;
+            c = new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256));
+        }
+        g.setColor(c);
         g.fillRect(getX(), getY(), getWidth(), getHeight());
     }
 }

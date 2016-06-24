@@ -1,6 +1,7 @@
 package nl.icode4living.formframework.component.decoration;
 
 import nl.icode4living.formframework.component.FFComponent;
+import nl.icode4living.formframework.component.observer.FFOnEnterListener;
 import nl.icode4living.formframework.util.TextUtil;
 
 import java.awt.*;
@@ -23,6 +24,4 @@ public class FFLabel extends FFDecoration {
         gc2d.setFont(new Font("arial", Font.PLAIN, 16));
         TextUtil.drawCenteredString(getText(), getWidth(), getHeight(), getX(), getY(), gc2d);
     }
-
-
 }

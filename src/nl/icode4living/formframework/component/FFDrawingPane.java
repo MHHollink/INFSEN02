@@ -17,7 +17,7 @@ import java.util.List;
  * @author Marcel
  * @since 15-6-2016.
  */
-public class FFPanel extends JPanel implements Runnable, MouseListener{
+public class FFDrawingPane extends JPanel implements Runnable, MouseListener{
 
     // drawing loop
     private Thread thread;
@@ -32,7 +32,7 @@ public class FFPanel extends JPanel implements Runnable, MouseListener{
     // components
     private List<FFComponent> components;
 
-    public FFPanel(int width, int height) {
+    public FFDrawingPane(int width, int height) {
         setPreferredSize(new Dimension(width, height));
         running = true;
     }
@@ -58,6 +58,7 @@ public class FFPanel extends JPanel implements Runnable, MouseListener{
         long start, elapsed, wait;
         while(running){
             start = System.nanoTime();
+            update();
             draw();
             drawToScreen();
             elapsed = System.nanoTime() - start;
@@ -69,6 +70,10 @@ public class FFPanel extends JPanel implements Runnable, MouseListener{
                 e.printStackTrace();
             }
         }
+    }
+
+    private void update() {
+        components.forEach(component -> component.onMouseEnter(getMousePosition(), component));
     }
 
     private void init() {
@@ -95,11 +100,11 @@ public class FFPanel extends JPanel implements Runnable, MouseListener{
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        components.forEach(component -> component.onClick(e));
+        components.forEach(component -> component.onClick(e.getPoint(), component));
     }
 
     public void mousePressed(MouseEvent e) {}
     public void mouseReleased(MouseEvent e) { }
-    public void mouseEntered(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) { }
     public void mouseExited(MouseEvent e) { }
 }

@@ -8,8 +8,8 @@ import java.awt.*;
  * TODO: Write class level documentation
  *
  * @author Marcel
- * @since 01-6-2016.
+ * @since 24-6-2016.
  */
-public interface FFOnClickListener {
-    void onClick(Point e, FFComponent self);
+public interface FFOnEnterListener {
+    void onMouseEnter(Point e, FFComponent self);
 }
