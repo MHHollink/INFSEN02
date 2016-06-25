@@ -19,6 +19,8 @@ public abstract class AbsFFComponent implements FFComponent {
     private int y;
     private String text;
 
+    private boolean entered;
+
     private FFOnClickListener onClickListener;
     private FFOnEnterListener onEnterListener;
 
@@ -121,7 +123,18 @@ public abstract class AbsFFComponent implements FFComponent {
 
     @Override
     public void onMouseEnter(Point event, FFComponent self) {
-        if (event != null && (event.getX() >= getX() && event.getX() <= getX() + getWidth()) && (event.getY() >= getY() && event.getY() <= getY() + getHeight()) && onEnterListener != null)
-            onEnterListener.onMouseEnter(event, self);
+        if (event != null) {
+            if (
+                    ((event.getX() >= getX() && event.getX() <= getX() + getWidth()) &&
+                            (event.getY() >= getY() && event.getY() <= getY() + getHeight())) &&
+                            onEnterListener != null &&
+                            !entered) {
+                entered = true;
+                onEnterListener.onMouseEnter(event, self);
+            } else if (!((event.getX() >= getX() && event.getX() <= getX() + getWidth()) &&
+                    (event.getY() >= getY() && event.getY() <= getY() + getHeight()))) {
+                entered = false;
+            }
+        }
     }
 }

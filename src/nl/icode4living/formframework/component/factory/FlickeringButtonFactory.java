@@ -16,6 +16,10 @@ import java.awt.*;
  * @since 24-6-2016.
  */
 public class FlickeringButtonFactory implements FFButtonFactory {
+
+    protected FlickeringButtonFactory() {
+    }
+
     @Override
     public FFComponent construct(String text, int x, int y, int w, int h) {
         return new FFTextColor(

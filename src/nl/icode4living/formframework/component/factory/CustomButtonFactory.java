@@ -28,6 +28,9 @@ public class CustomButtonFactory implements FFButtonFactory{
         public static final String BORDER_SIZE= "brdr_size";
     }
 
+    protected CustomButtonFactory() {
+    }
+
     @Override
     public FFComponent construct(String text, int x, int y, int w, int h) {
         return new FFBase(text, x, y, w, h);

@@ -16,6 +16,10 @@ import java.awt.*;
  * @since 24-6-2016.
  */
 public class DefaultButtonFactory implements FFButtonFactory {
+
+    protected DefaultButtonFactory() {
+    }
+
     @Override
     public FFComponent construct(String text, int x, int y, int w, int h) {
         return new FFTextColor(
@@ -37,11 +41,15 @@ public class DefaultButtonFactory implements FFButtonFactory {
 
     @Override
     public FFComponent construct(String text, int x, int y, int w, int h, FFOnEnterListener l) {
-        return null;
+        FFComponent c = construct(text, x, y, w, h);
+        c.setOnMouseEnterListener(l);
+        return c;
     }
 
     @Override
     public FFComponent construct(String text, int x, int y, int w, int h, FFOnClickListener la, FFOnEnterListener lb) {
-        return null;
-    }
+        FFComponent c = construct(text, x, y, w, h);
+        c.setOnClickListener(la);
+        c.setOnMouseEnterListener(lb);
+        return c;    }
 }

@@ -9,7 +9,6 @@ import java.awt.*;
  * @since 15-6-2016.
  */
 public class TextUtil {
-
     public static void drawCenteredString(String s, int w, int h, int x, int y, Graphics g) {
         FontMetrics fm = g.getFontMetrics();
         x = (w - fm.stringWidth(s)) / 2 + x;
